@@ -372,6 +372,9 @@ type g struct {
 	// and check for debt in the malloc hot path. The assist ratio
 	// determines how this corresponds to scan work debt.
 	gcAssistBytes int64
+        rtPeriod int64
+        rtDeadline int64
+        rtWCET int64
 }
 
 type m struct {

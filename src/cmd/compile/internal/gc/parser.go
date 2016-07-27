@@ -115,7 +115,6 @@ func (p *parser) syntax_error(msg string) {
 	default:
 		tok = tokstring(p.tok)
 	}
-
 	Yyerror("syntax error: unexpected %s", tok+msg)
 }
 
@@ -2537,7 +2536,20 @@ func (p *parser) stmt() *Node {
 
 	case LGO:
 		p.next()
-		return Nod(OPROC, p.pseudocall(), nil)
+                var t uint64 = 0
+                var d uint64 = 0
+                var c uint64 = 0
+                if p.got('(') {
+                  t = 1
+                  d = 1
+                  c = 1
+                  p.want(')')
+                }
+                x := Nod(OPROC, p.pseudocall(), nil)
+                x.Left.T = t
+                x.Left.D = d
+                x.Left.C = c
+                return x
 
 	case LDEFER:
 		p.next()

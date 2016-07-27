@@ -73,6 +73,9 @@ type Node struct {
 	Likely    int8  // likeliness of if statement
 	hasVal    int8  // +1 for Val, -1 for Opt, 0 for not yet set
 	flags     uint8 // TODO: store more bool fields in this flag field
+        T         uint64// Period of Go routine
+        D         uint64// Deadline of Go routine
+        C         uint64// WCET of Go routine
 }
 
 const (

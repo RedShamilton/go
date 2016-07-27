@@ -134,7 +134,7 @@ func Nodreg(n *Node, t *Type, r int) {
 	if t == nil {
 		Fatalf("nodreg: t nil")
 	}
-
+        fmt.Println("Nodreg")
 	*n = Node{}
 	n.Op = OREGISTER
 	n.Addable = true

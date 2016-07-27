@@ -610,7 +610,7 @@ type (
 	// A GoStmt node represents a go statement.
 	GoStmt struct {
 		Go   token.Pos // position of "go" keyword
-                P    uint64
+                T    uint64
                 D    uint64
                 C    uint64
 		Call *CallExpr

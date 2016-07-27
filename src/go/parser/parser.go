@@ -1748,16 +1748,26 @@ func (p *parser) parseGoStmt() ast.Stmt {
 	if p.trace {
 		defer un(trace(p, "GoStmt"))
 	}
-
+	var t uint64 = 0
+	var d uint64 = 0
+	var c uint64 = 0
 	pos := p.expect(token.GO)
+	if p.tok == token.LPAREN {
+		p.next()
+		t = 1
+		d = 1
+		c = 1
+		p.expect(token.RPAREN)
+	}
 	call := p.parseCallExpr("go")
 	p.expectSemi()
 	if call == nil {
 		return &ast.BadStmt{From: pos, To: pos + 2} // len("go")
 	}
 
-	return &ast.GoStmt{Go: pos, Call: call}
+	return &ast.GoStmt{Go: pos, T: t, D: d, C: c, Call: call}
 }
+
 
 func (p *parser) parseDeferStmt() ast.Stmt {
 	if p.trace {

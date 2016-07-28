@@ -2589,24 +2589,48 @@ func (s *state) call(n *Node, k callKind) *ssa.Value {
 	stksize := fn.Type.ArgWidth() // includes receiver
 
 	// Run all argument assignments. The arg slots have already
-	// been offset by the appropriate amount (+2*widthptr for go/defer,
-	// +widthptr for interface calls).
+	// been offset by the appropriate amount (+2*widthptr for defer,
+	// +5*widthptr for go, and +widthptr for interface calls).
 	// For OCALLMETH, the receiver is set in these statements.
 	s.stmtList(n.List)
 
 	// Set receiver (for interface calls)
 	if rcvr != nil {
 		argStart := Ctxt.FixedFrameSize()
-		if k != callNormal {
+		if k == callDefer {
 			argStart += int64(2 * Widthptr)
+		}
+		if k == callGo {
+			argStart += int64(5 * Widthptr)
 		}
 		addr := s.entryNewValue1I(ssa.OpOffPtr, Types[TUINTPTR], argStart, s.sp)
 		s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, int64(Widthptr), addr, rcvr, s.mem())
 	}
 
-	// Defer/go args
-	if k != callNormal {
-		// Write argsize and closure (args to Newproc/Deferproc).
+	// go args
+	if k == callGo {
+                // Write t,d, and c.
+                t := s.constInt64(Types[TUINT64], int64(n.T))
+                s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, 8, s.sp, t, s.mem())
+                d := s.constInt64(Types[TUINT64], int64(n.D))
+                addrD := s.entryNewValue1I(ssa.OpOffPtr, Ptrto(Types[TUINT64]), int64(Widthptr), s.sp)
+                s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, 8, addrD, d, s.mem())
+                c := s.constInt64(Types[TUINT64], int64(n.C))
+                addrC := s.entryNewValue1I(ssa.OpOffPtr, Ptrto(Types[TUINT64]), int64(Widthptr), addrD)
+                s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, 8, addrC, c, s.mem())
+
+		// Write argsize and closure.
+		argsize := s.constInt32(Types[TUINT32], int32(stksize))
+                addrArgsize := s.entryNewValue1I(ssa.OpOffPtr, Ptrto(Types[TUINT64]), int64(Widthptr), addrC)
+		s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, 4, addrArgsize, argsize, s.mem())
+		addr := s.entryNewValue1I(ssa.OpOffPtr, Ptrto(Types[TUINTPTR]), int64(Widthptr), addrArgsize)
+		s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, int64(Widthptr), addr, closure, s.mem())
+		stksize += 5 * int64(Widthptr)
+	}
+
+	// defer args
+	if k == callDefer {
+		// Write argsize and closure.
 		argsize := s.constInt32(Types[TUINT32], int32(stksize))
 		s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, 4, s.sp, argsize, s.mem())
 		addr := s.entryNewValue1I(ssa.OpOffPtr, Ptrto(Types[TUINTPTR]), int64(Widthptr), s.sp)

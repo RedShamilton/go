@@ -2678,11 +2678,11 @@ func malg(stacksize int32) *g {
 // are available sequentially after &fn; they would not be
 // copied if a stack split occurred.
 //go:nosplit
-func newproc(siz int32, fn *funcval) {
+func newproc(t uint64, d uint64, c uint64, siz int32, fn *funcval) {
 	argp := add(unsafe.Pointer(&fn), sys.PtrSize)
 	pc := getcallerpc(unsafe.Pointer(&siz))
 	systemstack(func() {
-		newproc1(fn, (*uint8)(argp), siz, 0, pc)
+		newproc1(fn, (*uint8)(argp), siz, 0, pc,t,d,c)
 	})
 }
 
@@ -2690,7 +2690,7 @@ func newproc(siz int32, fn *funcval) {
 // at argp and returning nret bytes of results.  callerpc is the
 // address of the go statement that created this. The new g is put
 // on the queue of g's waiting to run.
-func newproc1(fn *funcval, argp *uint8, narg int32, nret int32, callerpc uintptr) *g {
+func newproc1(fn *funcval, argp *uint8, narg int32, nret int32, callerpc uintptr, t uint64, d uint64, c uint64) *g {
 	_g_ := getg()
 
 	if fn == nil {

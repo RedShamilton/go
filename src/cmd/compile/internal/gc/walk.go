@@ -294,7 +294,7 @@ func walkstmt(n *Node) *Node {
 		}
 
 		// make room for size & fn arguments.
-		adjustargs(n, 2*Widthptr)
+		adjustargs(n, 5*Widthptr)
 
 	case ORETURN:
 		walkexprlist(n.List.Slice(), &n.Ninit)

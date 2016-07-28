@@ -2540,8 +2540,8 @@ func (p *parser) stmt() *Node {
                 var d uint64 = 0
                 var c uint64 = 0
                 if p.got('(') {
-                  t = 1
-                  d = 1
+                  t = 3
+                  d = 2
                   c = 1
                   p.want(')')
                 }

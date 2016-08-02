@@ -2763,6 +2763,11 @@ func newproc1(fn *funcval, argp *uint8, narg int32, nret int32, callerpc uintptr
 	}
 	memmove(unsafe.Pointer(spArg), unsafe.Pointer(argp), uintptr(narg))
 
+        // Set RT parameters
+        newg.rtPeriod = t
+        newg.rtDeadline = d
+        newg.rtWCET = c
+
 	memclr(unsafe.Pointer(&newg.sched), unsafe.Sizeof(newg.sched))
 	newg.sched.sp = sp
 	newg.stktopsp = sp

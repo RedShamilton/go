@@ -1988,6 +1988,7 @@ OpSwitch:
 
 	case OPROC:
 		ok |= Etop
+                typecheckslice(n.List.Slice(), Etop|Erv)
 		n.Left = typecheck(n.Left, Etop|Erv)
 		checkdefergo(n)
 		break OpSwitch

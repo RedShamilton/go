@@ -282,6 +282,7 @@ func walkstmt(n *Node) *Node {
 		walkstmtlist(n.Rlist.Slice())
 
 	case OPROC:
+		walkexprlist(n.List.Slice(), &n.Ninit)
 		switch n.Left.Op {
 		case OPRINT, OPRINTN:
 			n.Left = walkprintfunc(n.Left, &n.Ninit)
@@ -293,7 +294,7 @@ func walkstmt(n *Node) *Node {
 			n.Left = walkexpr(n.Left, &n.Ninit)
 		}
 
-		// make room for size & fn arguments.
+		// make room for period, deadline, WCET, size & fn arguments.
 		adjustargs(n, 5*Widthptr)
 
 	case ORETURN:

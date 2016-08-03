@@ -19,7 +19,7 @@ import (
 	"strings"
 )
 
-const trace = false // if set, parse tracing can be enabled with -x
+const trace = true // if set, parse tracing can be enabled with -x
 
 // parse_import parses the export data of a package that is imported.
 func parse_import(bin *bufio.Reader, indent []byte) {
@@ -2536,11 +2536,22 @@ func (p *parser) stmt() *Node {
 		return Nod(OCONTINUE, p.onew_name(), nil)
 
 	case LGO:
-          //TODO: read parameters instead of hard coded values
 		p.next()
+                var args []*Node
+                if p.tok == '(' {
+                  args, _ = p.arg_list()
+                }
+                gotstruct := typ(TSTRUCT)
+                tmem := newField()
+                tmem.Type = Types[TUINT64]
+                dmem := newField()
+                dmem.Type = Types[TUINT64]
+                cmem := newField()
+                cmem.Type = Types[TUINT64]
+                gotstruct.Fields().Append(tmem,dmem,cmem)
                 x := Nod(OPROC, p.pseudocall(), nil)
-                args := p.goarg_list()
                 x.List.Set(args)
+                x.Type = gotstruct
                 return x
 
 	case LDEFER:
@@ -2686,42 +2697,6 @@ func (p *parser) arg_list() (l []*Node, ddd bool) {
 
 	p.xnest--
 	p.want(')')
-
-	return
-}
-
-// GoArguments = [ "(" Expression "," Expression "," Expression ")" ]
-func (p *parser) goarg_list() (l []*Node) {
-	if trace && Debug['x'] != 0 {
-		defer p.trace("goarg_list")()
-	}
-
-
-          left := new(Node)
-          right := Nodintconst(0)
-          right.Type = Types[TUINT64]
-          Nodindreg(left, Types[TUINT64],Thearch.REGSP)
-          left.Xoffset = 0
-          as := Nod(OAS,left,right)
-          as.Type = Types[TUINT64]
-          l = append(l, as)
-          as.Left.Xoffset = 8
-          l = append(l, as)
-          as.Left.Xoffset = 16
-          l = append(l, as)
-
-    //    if p.got('(') {
-    //      for p.tok != EOF && p.tok != ')' {
-    //              right := p.expr()
-    //              left :=
-    //              l = append(l, as) // expr_or_type
-    //              if !p.ocomma(')') {
-    //                      break
-    //              }
-    //      }
-
-    //      p.want(')')
-    //  }
 
 	return
 }

@@ -20,7 +20,7 @@ func walk(fn *Node) {
 	Curfn = fn
 
 	if Debug['W'] != 0 {
-		s := fmt.Sprintf("\nbefore %v", Curfn.Func.Nname.Sym)
+		s := fmt.Sprintf("\nbefore walk %v", Curfn.Func.Nname.Sym)
 		dumplist(s, Curfn.Nbody)
 	}
 
@@ -283,6 +283,10 @@ func walkstmt(n *Node) *Node {
 
 	case OPROC:
 		walkexprlist(n.List.Slice(), &n.Ninit)
+                if n.List.Len() > 0 {
+                  ll := ascompatte(n.Op, nil, false, n.Type, n.List.Slice(), 0, &n.Ninit)
+                  n.List.Set(reorder1(ll))
+                }
 		switch n.Left.Op {
 		case OPRINT, OPRINTN:
 			n.Left = walkprintfunc(n.Left, &n.Ninit)

@@ -1988,7 +1988,10 @@ OpSwitch:
 
 	case OPROC:
 		ok |= Etop
-                typecheckslice(n.List.Slice(), Etop|Erv)
+                typecheckslice(n.List.Slice(), Etop|Erv|Easgn)
+                if n.List.Len() > 0 {
+                  typecheckaste(OPROC, nil, false, n.Type, n.List, func() string { return fmt.Sprintf("argument to %v", n) })
+                }
 		n.Left = typecheck(n.Left, Etop|Erv)
 		checkdefergo(n)
 		break OpSwitch

@@ -584,6 +584,7 @@ func (s *state) stmt(n *Node) {
 	case ODEFER:
 		s.call(n.Left, callDefer)
 	case OPROC:
+	        s.stmtList(n.List)
 		s.call(n.Left, callGo)
 
 	case OAS2DOTTYPE:
@@ -2617,17 +2618,8 @@ func (s *state) call(n *Node, k callKind) *ssa.Value {
 
 	// go args
 	if k == callGo {
-                // Write t,d, and c.
-                t := s.constInt64(Types[TUINT64], int64(n.T))
-                s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, 8, s.sp, t, s.mem())
-                d := s.constInt64(Types[TUINT64], int64(n.D))
-                addrD := s.entryNewValue1I(ssa.OpOffPtr, Ptrto(Types[TUINT64]), int64(Widthptr), s.sp)
-                s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, 8, addrD, d, s.mem())
-                c := s.constInt64(Types[TUINT64], int64(n.C))
-                addrC := s.entryNewValue1I(ssa.OpOffPtr, Ptrto(Types[TUINT64]), int64(Widthptr), addrD)
-                s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, 8, addrC, c, s.mem())
-
 		// Write argsize and closure.
+                addrC := s.entryNewValue1I(ssa.OpOffPtr, Ptrto(Types[TUINT64]), int64(Widthptr*2), s.sp)
 		argsize := s.constInt32(Types[TUINT32], int32(stksize))
                 addrArgsize := s.entryNewValue1I(ssa.OpOffPtr, Ptrto(Types[TUINT64]), int64(Widthptr), addrC)
 		s.vars[&memVar] = s.newValue3I(ssa.OpStore, ssa.TypeMem, 4, addrArgsize, argsize, s.mem())

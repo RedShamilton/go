@@ -2,10 +2,10 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>GoRT</title>
+      <title>Realtime Extensions for Go</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
@@ -13,94 +13,138 @@
     <section class="page-header">
       <h1 class="project-name">Go<sup>RT</sup></h1>
       <h2 class="project-tagline">Realtime extensions for the Go programming language</h2>
-      <a href="https://github.com/RedShamilton/go" class="btn">View on GitHub</a>
-      <h3>Completion Progress</h3>
-      <progress value="22" max="100"></progress>
+        <h2 class="project-progress">Completion Progress</h2>
+        <progress class="project-progressbar" value="22" max="100"></progress>
+        <br>
+        <a href="https://github.com/RedShamilton/go" class="btn">View on GitHub</a>
     </section>
 
     <section class="main-content">
-      <h1><a id="go-realtime-extensions-project-page" class="anchor" href="#go-realtime-extensions-project-page"
-             aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Realtime Extensions
-        Project Page</h1>
+        <h2>
+            <a id="motivation" class="anchor" href="#motivation"
+               aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span>
+            </a>
+            Motivation
+        </h2>
 
-      <h2><a id="realtime-application-requirements" class="anchor" href="#realtime-application-requirements"
-             aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Realtime Application
-        Requirements</h2>
+        <p>
+            The effort to develop Go<sup>RT</sup> was stimulated by the original task from the project
+            <a href="https://sites.google.com/site/roselineproject/"><span class="roseline">Roseline</span></a> as a
+            requirement for a high-level programming language that exposes the <abbr title="Quality of Time">QoT</abbr>
+            characteristics to the application programmer using a modern language. The Go programming language was
+            chosen
+            for the abstraction of parallelism/concurrency that it utilizes, Goroutines and Channels, based upon the
+            <abbr title="Communicating Sequential Processes">CSP</abbr> work done by Tony Hoare.
+        </p>
 
-      <h3><a id="definitions" class="anchor" href="#definitions" aria-hidden="true"><span aria-hidden="true"
-                                                                                          class="octicon octicon-link"></span></a>Definitions
-      </h3>
+        <p>
+            The task of writing the realtime extensions for the Go programming language came as a natural progression
+            of defining what a language should provide in the framework of <span class="roseline">Roseline</span>. In a
+            framework that strives to expose as much details about time to the application programmer naturally lends
+            itself to realtime applications and as such the language was deemed necessary to provide realtime
+            facilities.
+        </p>
 
-      <ul>
-        <li><p><strong>Resolution:</strong> The smallest representable unit of a measurement</p></li>
-        <li><p><strong>Accuracy:</strong> The smallest repeatable unit of measurement</p></li>
-        <li><p><strong>Latency:</strong> The time elapsed from some time T when an event has actually occured till when
-          it is acknowledge as having occured</p></li>
-        <li><p><strong>Jitter:</strong> The deviation from true periodicity of a presumed periodic event</p></li>
-      </ul>
+        <p>
+            These realtime facilities that Go<sup>RT</sup> provides have two distinct advantages over using an
+            <abbr title="Realtime Operating System">RTOS</abbr>. The first advantage is one of portability; that is, an
+            application can be written in Go<sup>RT</sup> and any platform in the future that supports Go<sup>RT</sup>
+            can run this application without modification. The second advantage is that the programmer can develop their
+            application on the latest mainline version of the Linux kernel with PREEMPT-RT enabled whereas many of the
+            realtime Linux variants are often several versions behind and due to the nature of their modifications will
+            likely never be merged into the main development line. Another current advantage that likely will change in
+            the near future is that a realtime application developed in Go<sup>RT</sup> can achieve better performance
+            with respect to scheduling latency than the same application can using kernel threads due to extremely low
+            scheduling latency that is seen in user-level threads packages (what Goroutines essentially boil down too).
+        </p>
 
       <h2>
-        <a id="linux-and-realtime-applications" class="anchor" href="#linux-and-realtime-applications"
-           aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Linux and Realtime
-        Applications</h2>
-
-      <h3>
-        <a id="design-goals-of-linux" class="anchor" href="#design-goals-of-linux" aria-hidden="true"><span
-                aria-hidden="true" class="octicon octicon-link"></span></a>Design Goals of Linux</h3>
-
-      <h3>
-        <a id="preempt-rt-patch" class="anchor" href="#preempt-rt-patch" aria-hidden="true"><span aria-hidden="true"
-                                                                                                  class="octicon octicon-link"></span></a>PREEMPT-RT
-        Patch</h3>
-
-      <h3>
-        <a id="user-level-threads-approach" class="anchor" href="#user-level-threads-approach" aria-hidden="true"><span
-                aria-hidden="true" class="octicon octicon-link"></span></a>User-Level Threads Approach</h3>
-
-      <h2>
-        <a id="go-language-overview" class="anchor" href="#go-language-overview" aria-hidden="true"><span
-                aria-hidden="true" class="octicon octicon-link"></span></a>Go Language Overview</h2>
-
-      <h3>
-        <a id="basics" class="anchor" href="#basics" aria-hidden="true"><span aria-hidden="true"
-                                                                              class="octicon octicon-link"></span></a>Basics
-      </h3>
-
-      <h3>
-        <a id="realtime-extensions" class="anchor" href="#realtime-extensions" aria-hidden="true"><span
-                aria-hidden="true" class="octicon octicon-link"></span></a>Realtime Extensions</h3>
-
-      <h3>
         <a id="current-progress" class="anchor" href="#current-progress" aria-hidden="true"><span aria-hidden="true"
-                                                                                                  class="octicon octicon-link"></span></a>Current
-        Progress</h3>
+                                                                                                  class="octicon octicon-link"></span></a>
+          Current Progress
+      </h2>
+
+        <p>
+            We are currently porting the work that Zhou Fang did previously on Go 1.4 to Go 1.7. This involves a fairly
+            substantial rewrite as Go has since switched from compiler being writting in C and Go to being entirely
+            written
+            in Go. Also, the previous work did not have modifications to the compiler's parser and code generation so
+            this
+            work is new.
+        </p>
+
+        <ul style="list-style-type:none">
+            <li><strong>&#x2611;</strong> Modify Compiler</li>
+            <ul style="list-style-type:none">
+                <li><strong>&#x2611;</strong> Modify parser to recognize <code>go (t,d,c)</code> variant of the
+                    <code>go</code> operator
+                </li>
+                <li><strong>&#x2611;</strong> Modify AST to represent <code>go (t,d,c)</code> variant of the
+                    <code>go</code> operator
+                </li>
+                <li><strong>&#x2611;</strong> Modify <code>type g struct</code> to hold t,d, and c parameters</li>
+                <li><strong>&#x2611;</strong> Modify code generation for setting t,d, and c parameters when <code>go
+                    (t,d,c)</code> is invoked
+                </li>
+            </ul>
+            <li><strong>&#x2610;</strong> Modify Scheduler</li>
+            <ul style="list-style-type:none">
+                <li><strong>&#x2611;</strong> Write EDF based next goroutine selection</li>
+                <li><strong>&#x2610;</strong> Remove work stealing from realtime scheduling</li>
+                <li><strong>&#x2610;</strong> Remove other throughput features from realtime scheduling</li>
+            </ul>
+            <li><strong>&#x2610;</strong> Modify Channels</li>
+            <li><strong>&#x2610;</strong> Modify Memory Manager</li>
+            <li><strong>&#x2610;</strong> Write <code>realtime</code> package</li>
+            <ul style="list-style-type:none">
+                <li><strong>&#x2610;</strong> Write <code>setup</code> function to handle preallocating memory, setting
+                    interrupt and CPU affinities, and etc
+                </li>
+            </ul>
+            <li>&#x2610; Develop profiling tools to measure WCET for tasks</li>
+        </ul>
 
       <h2>
-        <a id="realtime-performance-analysis" class="anchor" href="#realtime-performance-analysis"
-           aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Realtime Performance
-        Analysis</h2>
+          <a id="schedule-latency-analysis" class="anchor" href="#schedule-latency-analysis"
+             aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+          Scheduling Latency Analysis
+      </h2>
+
+        <p>
+            One of the most important factors and considerations in determining if a realtime platform can adequately
+            perform a real-time application is scheduling latency. To obtain these figures we use the de facto standard
+            utility for Linux, <a href="https://rt.wiki.kernel.org/index.php/Cyclictest"><code>cyclictest</code></a>,
+            for obtaining scheduling latencies. The <code>cyclictest</code> utility measures the latency from when a
+            timer expires until when the thread that set the timer is executed. A modified version of this utility is in
+            the works to measure the latency from when a GPIO triggered interrupt is fired till when the servicing
+            thread (not the ISR) is executing.
+        </p>
 
       <h3>
         <a id="linux-with-preempt-rt-patch" class="anchor" href="#linux-with-preempt-rt-patch" aria-hidden="true"><span
-                aria-hidden="true" class="octicon octicon-link"></span></a>Linux with PREEMPT-RT Patch</h3>
+                aria-hidden="true" class="octicon octicon-link"></span></a>Linux with PREEMPT-RT Patch
+      </h3>
 
-      <p>As stated in Realtime requirements section, one of the most important factors and
-        considerations in determining if a realtime platform can adequately perform a real-time application is
-        scheduling latency. To obtain these figures we use the de facto standard utility for Linux, <a
-                href="https://rt.wiki.kernel.org/index.php/Cyclictest"><code>cyclictest</code></a>, for obtaining
-        scheduling latencies. The <code>cyclictest</code> utility measures the latency from when a timer expires until
-        when the thread that set the timer is executed. A modified version of this utility is in the works to measure
-        the latency from when a GPIO triggered interrupt is fired till when the servicing thread (not the ISR) is
-        executing.</p>
+        <p>
+            The results below show that the best case scenario is about a 7 μs latency. The value of best case scenario
+            can be factored into the period of a given task to account for the scheduling latency, e.g. a task with a
+            period of 1000 μs would be set to 993 μs. Then the worst-case scenario - the best-case scenario (62 - 11 =
+            51 μs)
+            represents the single-sided scheduling jitter that must be taken into account. If this jitter is tolerable
+            for the application, it can be added onto the worst-case execution time of a task to account for it in
+            various scheduling algorithms such as cyclic executive, EDF, and etc... It's worth noting that the
+            worst-case
+            value of 62 μs also drives what the minimum period of a task could be on this platform. There are other ways
+            of incorporating these numbers into the various parameters of a task and it is up to the developer how they
+            choose to treat these numbers and account for them.
+        </p>
 
-      <p>The results below show that the best case scenario is about a 7 us latency. However, this best case scenario is
-        often meaningless to us in respect to what can be achecieved on a system. The average case is about XX us with a
-        worst case of YY us. This worst case roughly equates to the jitter around either the minimium or average case.
-        With this in mind, we can see that the scheduling latency that must be accounted for in this system would be YY
-        us. If this value is tolerable for the application, it can be added onto the worst-case execution time of a task
-        to account for it in various scheduling alogorithms such as cyclic executive, EDF, and etc... However, it should
-        be worth noting that this value of YY also drives what the minimium period of a task could be on this
-        platform.</p>
+        <p>
+            The results for SCHED_NORM were included for completeness but it can be seen that these values are orders of
+            magnitude worse than SCHED_FIFO. Tasks utilizing the SCHED_NORM scheduling class are lower priority than any
+            SCHED_FIFO task regardless of priority and typically are used for background tasks, system services and
+            such.
+        </p>
 
       <div class="highlight highlight-source-shell">
         <pre>
@@ -111,7 +155,7 @@
           <span class="pl-c"># -t              - schedules 1 thread per CPU</span>
           <span class="pl-c"># -p 99           - sets the thread priority to 99</span>
           <span class="pl-c"># -n              - uses clock_nanosleep</span>
-          <span class="pl-c"># -q              - supresses output until test is completed</span>
+          <span class="pl-c"># -q              - suppresses output until test is completed</span>
           <span class="pl-c"># --policy=normal - uses SCHED_NORMAL instead of the default SHED_FIFO</span>
           <span class="pl-c">#                   scheduler class for the test</span>
 
@@ -156,8 +200,11 @@
       </pre>
 
       <figure>
-        <img src="images/hist-fifo.svg" alt="Histogram for SCHED_FIFO" width="640" height="480">
-        <figcaption>cyclictest latency histogram for SCHED_FIFO</figcaption>
+          <figcaption>Scheduling Latency Histogram for SCHED_FIFO</figcaption>
+          <img src="images/hist-fifo.svg" alt="Histogram for SCHED_FIFO">
+
+          <figcaption>Scheduling Latency Histogram for SCHED_NORM</figcaption>
+          <img src="images/hist-norm.svg" alt="Histogram for SCHED_NORM">
       </figure>
 
       <h3>
@@ -172,8 +219,28 @@
            aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Language with Realtime
         Extensions</h3>
 
-      <p>Currently porting <code>cyclictest</code> to Go-RT</p>
+        <p>Currently porting <code>cyclictest</code> to Go<sup>RT</sup></p>
 
+        <h2>
+            <a id="definitions" class="anchor" href="#definitions" aria-hidden="true"><span aria-hidden="true"
+                                                                                            class="octicon octicon-link"></span></a>
+            Definitions
+        </h2>
+
+        <ul>
+            <li><strong>Resolution:</strong> The smallest representable unit of a measurement</li>
+            <li><strong>Accuracy:</strong> The smallest repeatable unit of measurement</li>
+            <li><strong>Latency:</strong> The time elapsed from some time T when an event has actually occurred till
+                when it is acknowledge as having occurred
+            </li>
+            <li><strong>Jitter:</strong> The deviation from true periodicity of a presumed periodic event</li>
+        </ul>
+
+        <h2>
+            <a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true"
+                                                                                          class="octicon octicon-link"></span></a>
+            References
+        </h2>
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/RedShamilton/go">Go<sup>RT</sup></a> is maintained by <a
                 href="https://github.com/RedShamilton">Sean Hamilton</a>.</span>

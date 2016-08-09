@@ -1,0 +1,28 @@
+#!/bin/bash
+# The test is run 10 times in a loop to obtain more data points and verify
+# repeatable results
+#
+# -l 100000       - runs the test 100,000 times
+# -t              - schedules 1 thread per CPU
+# -p 99	          - sets the thread priority to 99
+# -n	          - uses clock_nanosleep
+# -q	          - supresses output until test is completed
+# --policy=normal - uses SCHED_NORMAL instead of the default SHED_FIFO
+#                   scheduler class for the test
+
+echo '---------    cyclictest -t -p 99 -n -l 100000 -q    -----------'
+for i in `seq 1 10`; do cyclictest -t -p 99 -n -l 100000 -q; done
+echo '---------    cyclictest -t --policy=normal -n -l 100000 -q    -----------'
+for i in `seq 1 10`; do cyclictest -t --policy=normal -n -l 100000 -q; done
+
+cyclictest -t -p 99 -n -l 1000000 -q -h --histfile=hist-fifo.dat
+cyclictest -t --policy=normal -n -l 1000000 -q -h --histfile=hist-normal.dat
+
+echo 'set term png; set output "hist-fifo.png"; set boxwidth 0.7 relative; \
+      set yrange [0.8:1000000]; set ylabel "# of Tests"; set xlabel "Latency (us)"; \
+      set grid ytics; plot "hist-fifo.dat" using 1:2 with boxes fs solid notitle' | gnuplot
+
+echo 'set term png; set output "hist-normal.png"; set boxwidth 0.7 relative; \
+      set yrange [0.8:1000000]; set ylabel "# of Tests"; set xlabel "Latency (us)"; \
+      set grid ytics; plot "hist-normal.dat" using 1:2 with boxes fs solid notitle' | gnuplot
+

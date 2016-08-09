@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>GoRT by RedShamilton</title>
+    <title>GoRT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,121 +11,174 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">GoRT</h1>
+      <h1 class="project-name">Go<sup>RT</sup></h1>
       <h2 class="project-tagline">Realtime extensions for the Go programming language</h2>
       <a href="https://github.com/RedShamilton/go" class="btn">View on GitHub</a>
-      <a href="https://github.com/RedShamilton/go/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/RedShamilton/go/tarball/master" class="btn">Download .tar.gz</a>
+      <h3>Completion Progress</h3>
+      <progress value="22" max="100"></progress>
     </section>
 
     <section class="main-content">
-      <h1>
-<a id="go-realtime-extensions-project-page" class="anchor" href="#go-realtime-extensions-project-page" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Realtime Extensions Project Page</h1>
+      <h1><a id="go-realtime-extensions-project-page" class="anchor" href="#go-realtime-extensions-project-page"
+             aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Realtime Extensions
+        Project Page</h1>
 
-<h2>
-<a id="realtime-application-requirements" class="anchor" href="#realtime-application-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Realtime Application Requirements</h2>
+      <h2><a id="realtime-application-requirements" class="anchor" href="#realtime-application-requirements"
+             aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Realtime Application
+        Requirements</h2>
 
-<h3>
-<a id="definitions" class="anchor" href="#definitions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Definitions</h3>
+      <h3><a id="definitions" class="anchor" href="#definitions" aria-hidden="true"><span aria-hidden="true"
+                                                                                          class="octicon octicon-link"></span></a>Definitions
+      </h3>
 
-<ul>
-<li><p><strong>Resolution:</strong> The smallest representable unit of a measurement</p></li>
-<li><p><strong>Accuracy:</strong> The smallest repeatable unit of measurement</p></li>
-<li><p><strong>Latency:</strong> The time elapsed from some time T when an event has actually occured till when it is acknowledge as having occured</p></li>
-<li><p><strong>Jitter:</strong> The deviation from true periodicity of a presumed periodic event</p></li>
-</ul>
+      <ul>
+        <li><p><strong>Resolution:</strong> The smallest representable unit of a measurement</p></li>
+        <li><p><strong>Accuracy:</strong> The smallest repeatable unit of measurement</p></li>
+        <li><p><strong>Latency:</strong> The time elapsed from some time T when an event has actually occured till when
+          it is acknowledge as having occured</p></li>
+        <li><p><strong>Jitter:</strong> The deviation from true periodicity of a presumed periodic event</p></li>
+      </ul>
 
-<h2>
-<a id="linux-and-realtime-applications" class="anchor" href="#linux-and-realtime-applications" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Linux and Realtime Applications</h2>
+      <h2>
+        <a id="linux-and-realtime-applications" class="anchor" href="#linux-and-realtime-applications"
+           aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Linux and Realtime
+        Applications</h2>
 
-<h3>
-<a id="design-goals-of-linux" class="anchor" href="#design-goals-of-linux" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Design Goals of Linux</h3>
+      <h3>
+        <a id="design-goals-of-linux" class="anchor" href="#design-goals-of-linux" aria-hidden="true"><span
+                aria-hidden="true" class="octicon octicon-link"></span></a>Design Goals of Linux</h3>
 
-<h3>
-<a id="preempt-rt-patch" class="anchor" href="#preempt-rt-patch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PREEMPT-RT Patch</h3>
+      <h3>
+        <a id="preempt-rt-patch" class="anchor" href="#preempt-rt-patch" aria-hidden="true"><span aria-hidden="true"
+                                                                                                  class="octicon octicon-link"></span></a>PREEMPT-RT
+        Patch</h3>
 
-<h3>
-<a id="user-level-threads-approach" class="anchor" href="#user-level-threads-approach" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>User-Level Threads Approach</h3>
+      <h3>
+        <a id="user-level-threads-approach" class="anchor" href="#user-level-threads-approach" aria-hidden="true"><span
+                aria-hidden="true" class="octicon octicon-link"></span></a>User-Level Threads Approach</h3>
 
-<h2>
-<a id="go-language-overview" class="anchor" href="#go-language-overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Language Overview</h2>
+      <h2>
+        <a id="go-language-overview" class="anchor" href="#go-language-overview" aria-hidden="true"><span
+                aria-hidden="true" class="octicon octicon-link"></span></a>Go Language Overview</h2>
 
-<h3>
-<a id="basics" class="anchor" href="#basics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basics</h3>
+      <h3>
+        <a id="basics" class="anchor" href="#basics" aria-hidden="true"><span aria-hidden="true"
+                                                                              class="octicon octicon-link"></span></a>Basics
+      </h3>
 
-<h3>
-<a id="realtime-extensions" class="anchor" href="#realtime-extensions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Realtime Extensions</h3>
+      <h3>
+        <a id="realtime-extensions" class="anchor" href="#realtime-extensions" aria-hidden="true"><span
+                aria-hidden="true" class="octicon octicon-link"></span></a>Realtime Extensions</h3>
 
-<h3>
-<a id="current-progress" class="anchor" href="#current-progress" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Current Progress</h3>
+      <h3>
+        <a id="current-progress" class="anchor" href="#current-progress" aria-hidden="true"><span aria-hidden="true"
+                                                                                                  class="octicon octicon-link"></span></a>Current
+        Progress</h3>
 
-<h2>
-<a id="realtime-performance-analysis" class="anchor" href="#realtime-performance-analysis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Realtime Performance Analysis</h2>
+      <h2>
+        <a id="realtime-performance-analysis" class="anchor" href="#realtime-performance-analysis"
+           aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Realtime Performance
+        Analysis</h2>
 
-<h3>
-<a id="linux-with-preempt-rt-patch" class="anchor" href="#linux-with-preempt-rt-patch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Linux with PREEMPT-RT Patch</h3>
+      <h3>
+        <a id="linux-with-preempt-rt-patch" class="anchor" href="#linux-with-preempt-rt-patch" aria-hidden="true"><span
+                aria-hidden="true" class="octicon octicon-link"></span></a>Linux with PREEMPT-RT Patch</h3>
 
-<p>As stated in Realtime requirements section, one of the most important factors and
-considerations in determining if a realtime platform can adequately perform a real-time application is scheduling latency. To obtain these figures we use the de facto standard utility for Linux, <a href="https://rt.wiki.kernel.org/index.php/Cyclictest"><code>cyclictest</code></a>, for obtaining scheduling latencies. The <code>cyclictest</code> utility measures the latency from when a timer expires until when the thread that set the timer is executed. A modified version of this utility is in the works to measure the latency from when a GPIO triggered interrupt is fired till when the servicing thread (not the ISR) is executing.</p>
+      <p>As stated in Realtime requirements section, one of the most important factors and
+        considerations in determining if a realtime platform can adequately perform a real-time application is
+        scheduling latency. To obtain these figures we use the de facto standard utility for Linux, <a
+                href="https://rt.wiki.kernel.org/index.php/Cyclictest"><code>cyclictest</code></a>, for obtaining
+        scheduling latencies. The <code>cyclictest</code> utility measures the latency from when a timer expires until
+        when the thread that set the timer is executed. A modified version of this utility is in the works to measure
+        the latency from when a GPIO triggered interrupt is fired till when the servicing thread (not the ISR) is
+        executing.</p>
 
-<p>The results below show that the best case scenario is about a 7 us latency. However, this best case scenario is often meaningless to us in respect to what can be achecieved on a system. The average case is about XX us with a worst case of YY us. This worst case roughly equates to the jitter around either the minimium or average case. With this in mind, we can see that the scheduling latency that must be accounted for in this system would be YY us. If this value is tolerable for the application, it can be added onto the worst-case execution time of a task to account for it in various scheduling alogorithms such as cyclic executive, EDF, and etc... However, it should be worth noting that this value of YY also drives what the minimium period of a task could be on this platform.</p>
+      <p>The results below show that the best case scenario is about a 7 us latency. However, this best case scenario is
+        often meaningless to us in respect to what can be achecieved on a system. The average case is about XX us with a
+        worst case of YY us. This worst case roughly equates to the jitter around either the minimium or average case.
+        With this in mind, we can see that the scheduling latency that must be accounted for in this system would be YY
+        us. If this value is tolerable for the application, it can be added onto the worst-case execution time of a task
+        to account for it in various scheduling alogorithms such as cyclic executive, EDF, and etc... However, it should
+        be worth noting that this value of YY also drives what the minimium period of a task could be on this
+        platform.</p>
 
-<div class="highlight highlight-source-shell"><pre><span class="pl-c"># The test is run 10 times in a loop to obtain more data points and verify</span>
-<span class="pl-c"># repeatable results</span>
-<span class="pl-c">#</span>
-<span class="pl-c"># -l 100000       - runs the test 100,000 times</span>
-<span class="pl-c"># -t              - schedules 1 thread per CPU</span>
-<span class="pl-c"># -p 99           - sets the thread priority to 99</span>
-<span class="pl-c"># -n              - uses clock_nanosleep</span>
-<span class="pl-c"># -q              - supresses output until test is completed</span>
-<span class="pl-c"># --policy=normal - uses SCHED_NORMAL instead of the default SHED_FIFO</span>
-<span class="pl-c">#                   scheduler class for the test</span>
+      <div class="highlight highlight-source-shell">
+        <pre>
+          <span class="pl-c"># The test is run 10 times in a loop to obtain more data points and verify</span>
+          <span class="pl-c"># repeatable results</span>
+          <span class="pl-c">#</span>
+          <span class="pl-c"># -l 100000       - runs the test 100,000 times</span>
+          <span class="pl-c"># -t              - schedules 1 thread per CPU</span>
+          <span class="pl-c"># -p 99           - sets the thread priority to 99</span>
+          <span class="pl-c"># -n              - uses clock_nanosleep</span>
+          <span class="pl-c"># -q              - supresses output until test is completed</span>
+          <span class="pl-c"># --policy=normal - uses SCHED_NORMAL instead of the default SHED_FIFO</span>
+          <span class="pl-c">#                   scheduler class for the test</span>
 
-<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>---------    cyclictest -t -p 99 -n -l 100000 -q    -----------<span class="pl-pds">'</span></span>
-<span class="pl-k">for</span> <span class="pl-smi">i</span> <span class="pl-k">in</span> <span class="pl-s"><span class="pl-pds">`</span>seq 1 10<span class="pl-pds">`</span></span><span class="pl-k">;</span> <span class="pl-k">do</span> cyclictest -t -p 99 -n -l 100000 -q<span class="pl-k">;</span> <span class="pl-k">done</span>
-<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>---------    cyclictest -t --policy=normal -n -l 100000 -q    -----------<span class="pl-pds">'</span></span>
-<span class="pl-k">for</span> <span class="pl-smi">i</span> <span class="pl-k">in</span> <span class="pl-s"><span class="pl-pds">`</span>seq 1 10<span class="pl-pds">`</span></span><span class="pl-k">;</span> <span class="pl-k">do</span> cyclictest -t --policy=normal -n -l 100000 -q<span class="pl-k">;</span> <span class="pl-k">done</span></pre></div>
+          <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>---------    cyclictest -t -p 99 -n -l 100000 -q    -----------<span
+                class="pl-pds">'</span></span>
+          <span class="pl-k">for</span> <span class="pl-smi">i</span> <span class="pl-k">in</span> <span
+                class="pl-s"><span class="pl-pds">`</span>seq 1 10<span class="pl-pds">`</span></span><span
+                class="pl-k">;</span> <span class="pl-k">do</span> cyclictest -t -p 99 -n -l 100000 -q<span
+                class="pl-k">;</span> <span class="pl-k">done</span>
+          <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>---------    cyclictest -t --policy=normal -n -l 100000 -q    -----------<span
+                class="pl-pds">'</span></span>
+          <span class="pl-k">for</span> <span class="pl-smi">i</span> <span class="pl-k">in</span> <span
+                class="pl-s"><span class="pl-pds">`</span>seq 1 10<span class="pl-pds">`</span></span><span
+                class="pl-k">;</span> <span class="pl-k">do</span> cyclictest -t --policy=normal -n -l 100000 -q<span
+                class="pl-k">;</span> <span class="pl-k">done</span>
+        </pre>
+      </div>
 
-<pre><code>Output of the above test script
+      <pre>
+        <code>
+          Output of the above test script
 
----------    cyclictest -t -p 99 -n -l 100000 -q    -----------
-T: 0 (17266) P:99 I:1000 C: 100000 Min:   8 Act:   14 Avg:   11 Max:   55
-T: 0 (17268) P:99 I:1000 C: 100000 Min:   8 Act:   10 Avg:   11 Max:   62
-T: 0 (17270) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   56
-T: 0 (17272) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   56
-T: 0 (17274) P:99 I:1000 C: 100000 Min:   7 Act:   14 Avg:   11 Max:   63
-T: 0 (17276) P:99 I:1000 C: 100000 Min:   8 Act:   10 Avg:   11 Max:   61
-T: 0 (17278) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   54
-T: 0 (17281) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   57
-T: 0 (17283) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   53
-T: 0 (17285) P:99 I:1000 C: 100000 Min:   7 Act:   11 Avg:   11 Max:   49
----------    cyclictest -t --policy=normal -n -l 100000 -q    -----------
-T: 0 (17389) P: 0 I:1000 C: 100000 Min:     17 Act:   62 Avg:   65 Max:    6120
-T: 0 (17393) P: 0 I:1000 C: 100000 Min:     18 Act:   64 Avg:   63 Max:   11913
-T: 0 (17399) P: 0 I:1000 C: 100000 Min:     18 Act:   61 Avg:   63 Max:   12568
-T: 0 (17402) P: 0 I:1000 C: 100000 Min:     17 Act:   62 Avg:   63 Max:    3939
-T: 0 (17406) P: 0 I:1000 C: 100000 Min:     18 Act:   63 Avg:   63 Max:   11342
-T: 0 (17408) P: 0 I:1000 C: 100000 Min:     18 Act:   62 Avg:   63 Max:    6724
-</code></pre>
+          ---------    cyclictest -t -p 99 -n -l 100000 -q    -----------
+          T: 0 (17266) P:99 I:1000 C: 100000 Min:   8 Act:   14 Avg:   11 Max:   55
+          T: 0 (17268) P:99 I:1000 C: 100000 Min:   8 Act:   10 Avg:   11 Max:   62
+          T: 0 (17270) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   56
+          T: 0 (17272) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   56
+          T: 0 (17274) P:99 I:1000 C: 100000 Min:   7 Act:   14 Avg:   11 Max:   63
+          T: 0 (17276) P:99 I:1000 C: 100000 Min:   8 Act:   10 Avg:   11 Max:   61
+          T: 0 (17278) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   54
+          T: 0 (17281) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   57
+          T: 0 (17283) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   53
+          T: 0 (17285) P:99 I:1000 C: 100000 Min:   7 Act:   11 Avg:   11 Max:   49
+          ---------    cyclictest -t --policy=normal -n -l 100000 -q    -----------
+          T: 0 (17389) P: 0 I:1000 C: 100000 Min:     17 Act:   62 Avg:   65 Max:    6120
+          T: 0 (17393) P: 0 I:1000 C: 100000 Min:     18 Act:   64 Avg:   63 Max:   11913
+          T: 0 (17399) P: 0 I:1000 C: 100000 Min:     18 Act:   61 Avg:   63 Max:   12568
+          T: 0 (17402) P: 0 I:1000 C: 100000 Min:     17 Act:   62 Avg:   63 Max:    3939
+          T: 0 (17406) P: 0 I:1000 C: 100000 Min:     18 Act:   63 Avg:   63 Max:   11342
+          T: 0 (17408) P: 0 I:1000 C: 100000 Min:     18 Act:   62 Avg:   63 Max:    6724
+        </code>
+      </pre>
 
-<h3>
-<a id="go-language" class="anchor" href="#go-language" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Language</h3>
+      <figure>
+        <img src="images/hist-fifo.svg" alt="Histogram for SCHED_FIFO" width="640" height="480">
+        <figcaption>cyclictest latency histogram for SCHED_FIFO</figcaption>
+      </figure>
 
-<p>Currently porting <code>cyclictest</code> to Go</p>
+      <h3>
+        <a id="go-language" class="anchor" href="#go-language" aria-hidden="true"><span aria-hidden="true"
+                                                                                        class="octicon octicon-link"></span></a>Go
+        Language</h3>
 
-<h3>
-<a id="go-language-with-realtime-extensions" class="anchor" href="#go-language-with-realtime-extensions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Language with Realtime Extensions</h3>
+      <p>Currently porting <code>cyclictest</code> to Go</p>
 
-<p>Currently porting <code>cyclictest</code> to Go-RT</p>
+      <h3>
+        <a id="go-language-with-realtime-extensions" class="anchor" href="#go-language-with-realtime-extensions"
+           aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Language with Realtime
+        Extensions</h3>
+
+      <p>Currently porting <code>cyclictest</code> to Go-RT</p>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/RedShamilton/go">GoRT</a> is maintained by <a href="https://github.com/RedShamilton">RedShamilton</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/RedShamilton/go">Go<sup>RT</sup></a> is maintained by <a
+                href="https://github.com/RedShamilton">Sean Hamilton</a>.</span>
       </footer>
 
     </section>
-
-  
   </body>
 </html>

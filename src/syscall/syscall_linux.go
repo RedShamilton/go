@@ -927,6 +927,18 @@ func Munmap(b []byte) (err error) {
 //sys	Mlockall(flags int) (err error)
 //sys	Munlockall() (err error)
 
+//sys	SchedGetPriorityMax(policy int) (n int, err error)
+//sys	SchedGetPriorityMin(policy int) (n int, err error)
+//SchedSetAffinity
+//SchedGetAffinity
+//sys	SchedSetParam(pid _Pid_t, param *SchedParam) (n int, err error)
+//sys	SchedGetParam(pid _Pid_t, param *SchedParam) (n int, err error)
+//sys	SchedSetScheduler(pid _Pid_t, policy int, param *SchedParam) (n int, err error)
+//sys	SchedGetScheduler(pid _Pid_t) (n int, err error)
+//SchedRrGetInterval
+//SchedYield
+
+
 /*
  * Unimplemented
  */
@@ -1019,15 +1031,6 @@ func Munmap(b []byte) (err error) {
 // RtSigreturn
 // RtSigsuspend
 // RtSigtimedwait
-// SchedGetPriorityMax
-// SchedGetPriorityMin
-// SchedGetaffinity
-// SchedGetparam
-// SchedGetscheduler
-// SchedRrGetInterval
-// SchedSetaffinity
-// SchedSetparam
-// SchedYield
 // Security
 // Semctl
 // Semget

@@ -34,7 +34,7 @@
             characteristics to the application programmer using a modern language. The Go programming language was
             chosen
             for the abstraction of parallelism/concurrency that it utilizes, Goroutines and Channels, based upon the
-            <abbr title="Communicating Sequential Processes">CSP</abbr> work done by Tony Hoare.
+            <abbr title="Communicating Sequential Processes">CSP</abbr> work done by C.A.R. Hoare.
         </p>
 
         <p>
@@ -66,42 +66,42 @@
 
         <p>
             We are currently porting the work that Zhou Fang did previously on Go 1.4 to Go 1.7. This involves a fairly
-            substantial rewrite as Go has since switched from compiler being writting in C and Go to being entirely
-            written
-            in Go. Also, the previous work did not have modifications to the compiler's parser and code generation so
-            this
-            work is new.
+            substantial rewrite as Go has since switched from compiler being written in C and Go to being entirely
+            written in Go. The previous work did not have modifications to the compiler's parser and code generation so
+            this work is new.
         </p>
 
         <ul style="list-style-type:none">
-            <li><strong>&#x2611;</strong> Modify Compiler</li>
-            <ul style="list-style-type:none">
-                <li><strong>&#x2611;</strong> Modify parser to recognize <code>go (t,d,c)</code> variant of the
-                    <code>go</code> operator
-                </li>
-                <li><strong>&#x2611;</strong> Modify AST to represent <code>go (t,d,c)</code> variant of the
-                    <code>go</code> operator
-                </li>
-                <li><strong>&#x2611;</strong> Modify <code>type g struct</code> to hold t,d, and c parameters</li>
-                <li><strong>&#x2611;</strong> Modify code generation for setting t,d, and c parameters when <code>go
-                    (t,d,c)</code> is invoked
-                </li>
-            </ul>
-            <li><strong>&#x2610;</strong> Modify Scheduler</li>
-            <ul style="list-style-type:none">
-                <li><strong>&#x2611;</strong> Write EDF based next goroutine selection</li>
-                <li><strong>&#x2610;</strong> Remove work stealing from realtime scheduling</li>
-                <li><strong>&#x2610;</strong> Remove other throughput features from realtime scheduling</li>
-            </ul>
-            <li><strong>&#x2610;</strong> Modify Channels</li>
-            <li><strong>&#x2610;</strong> Modify Memory Manager</li>
-            <li><strong>&#x2610;</strong> Write <code>realtime</code> package</li>
-            <ul style="list-style-type:none">
-                <li><strong>&#x2610;</strong> Write <code>setup</code> function to handle preallocating memory, setting
-                    interrupt and CPU affinities, and etc
-                </li>
-            </ul>
-            <li>&#x2610; Develop profiling tools to measure WCET for tasks</li>
+            <li>&#x2611; Modify Compiler
+                <ul style="list-style-type:none">
+                    <li>&#x2611; Modify parser to recognize <code>go (t,d,c)</code> variant of the <code>go</code>
+                        operator
+                    </li>
+                    <li>&#x2611; Modify AST to represent <code>go (t,d,c)</code> variant of the <code>go</code> operator
+                    </li>
+                    <li>&#x2611; Modify <code>type g struct</code> to hold t,d, and c parameters</li>
+                    <li>&#x2611; Modify code generation for setting t,d, and c parameters when <code>go (t,d,c)</code>
+                        is invoked
+                    </li>
+                </ul>
+            </li>
+            <li>&#x2610; Modify Scheduler
+                <ul style="list-style-type:none">
+                    <li>&#x2611; Write EDF based next goroutine selection</li>
+                    <li>&#x2610; Remove work stealing from realtime scheduling</li>
+                    <li>&#x2610; Remove other throughput features from realtime scheduling</li>
+                </ul>
+            </li>
+            <li>&#x2610; Modify Channels</li>
+            <li>&#x2610; Modify Memory Manager</li>
+            <li>&#x2610; Write <code>realtime</code> package
+                <ul style="list-style-type:none">
+                    <li>&#x2610; Write <code>setup</code> function to handle preallocating memory, setting interrupt and
+                        CPU affinities, and etc
+                    </li>
+                    <li>&#x2610; Write profiling function to monitor performance while executing</li>
+                </ul>
+            </li>
         </ul>
 
       <h2>
@@ -120,9 +120,36 @@
             thread (not the ISR) is executing.
         </p>
 
+        <h3>
+            <a id="test-platform" class="anchor" href="#test-platform" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>
+            Test Platform
+        </h3>
+
+        The test platform used for these benchmarks is the reference <span class="roseline">Roseline</span> system,
+        the BeagleBone Black (BBB) embedded development board by Texas Instruments.
+
+        <h4>Hardware Configuration</h4>
+
+        <strong>Revision:</strong> C<br>
+        <strong>Processor:</strong> Texas Instruments Sitara XAM3359AZCZ100 Cortex A8 1GHz<br>
+        <strong>Memory:</strong> 512MB DDR3L 800MHz<br>
+        <strong>Storage:</strong> 64 GB μSD<br>
+        <strong>Power:</strong> Dedicated External 5v PS
+
+        <h4>Software Configuration</h4>
+
+        <strong>U-Boot:</strong> 2016.09-rc1-00245-gad6a303<br>
+        <strong>Kernel:</strong> 4.4.6-bone-rt-r7 PREEMPT RT<br>
+        <strong>Device Tree:</strong> am335x-boneblack-overlay.dtb (HDMI Audio/Video/eMMC disabled)<br>
+        <strong>PM:</strong> CPU governor is disable and CPU runs at max frequency of 1 GHz<br>
+        <strong>Services:</strong> systemd (/sbin/init), systemd-journald, systemd-logind<br>
+        <strong>Access:</strong> serial port
+
       <h3>
         <a id="linux-with-preempt-rt-patch" class="anchor" href="#linux-with-preempt-rt-patch" aria-hidden="true"><span
-                aria-hidden="true" class="octicon octicon-link"></span></a>Linux with PREEMPT-RT Patch
+                aria-hidden="true" class="octicon octicon-link"></span></a>
+          Linux with PREEMPT-RT Patch
       </h3>
 
         <p>
@@ -190,16 +217,16 @@
           T: 0 (17283) P:99 I:1000 C: 100000 Min:   7 Act:   10 Avg:   11 Max:   53
           T: 0 (17285) P:99 I:1000 C: 100000 Min:   7 Act:   11 Avg:   11 Max:   49
           ---------    cyclictest -t --policy=normal -n -l 100000 -q    -----------
-	  T: 0 ( 1910) P: 0 I:1000 C: 100000 Min:   17 Act:  61 Avg:   61 Max:   951
-	  T: 0 ( 1912) P: 0 I:1000 C: 100000 Min:   16 Act:  61 Avg:   61 Max:   805
-	  T: 0 ( 1914) P: 0 I:1000 C: 100000 Min:   17 Act:  61 Avg:   61 Max:  1691
-	  T: 0 ( 1916) P: 0 I:1000 C: 100000 Min:   17 Act:  61 Avg:   61 Max:   928
-	  T: 0 ( 1918) P: 0 I:1000 C: 100000 Min:   16 Act:  61 Avg:   61 Max:  1497
-	  T: 0 ( 1920) P: 0 I:1000 C: 100000 Min:   16 Act:  61 Avg:   61 Max:  1305
-	  T: 0 ( 1923) P: 0 I:1000 C: 100000 Min:   17 Act:  61 Avg:   61 Max:  5338
-	  T: 0 ( 1925) P: 0 I:1000 C: 100000 Min:   16 Act:  61 Avg:   61 Max:  1486
-	  T: 0 ( 1927) P: 0 I:1000 C: 100000 Min:   17 Act:  63 Avg:   61 Max:  1530
-	  T: 0 ( 1929) P: 0 I:1000 C: 100000 Min:   17 Act:  61 Avg:   61 Max:  1018
+          T: 0 ( 1910) P: 0 I:1000 C: 100000 Min:   17 Act:  61 Avg:   61 Max:   951
+          T: 0 ( 1912) P: 0 I:1000 C: 100000 Min:   16 Act:  61 Avg:   61 Max:   805
+          T: 0 ( 1914) P: 0 I:1000 C: 100000 Min:   17 Act:  61 Avg:   61 Max:  1691
+          T: 0 ( 1916) P: 0 I:1000 C: 100000 Min:   17 Act:  61 Avg:   61 Max:   928
+          T: 0 ( 1918) P: 0 I:1000 C: 100000 Min:   16 Act:  61 Avg:   61 Max:  1497
+          T: 0 ( 1920) P: 0 I:1000 C: 100000 Min:   16 Act:  61 Avg:   61 Max:  1305
+          T: 0 ( 1923) P: 0 I:1000 C: 100000 Min:   17 Act:  61 Avg:   61 Max:  5338
+          T: 0 ( 1925) P: 0 I:1000 C: 100000 Min:   16 Act:  61 Avg:   61 Max:  1486
+          T: 0 ( 1927) P: 0 I:1000 C: 100000 Min:   17 Act:  63 Avg:   61 Max:  1530
+          T: 0 ( 1929) P: 0 I:1000 C: 100000 Min:   17 Act:  61 Avg:   61 Max:  1018
         </code>
       </pre>
 
@@ -212,16 +239,19 @@
       </figure>
 
       <h3>
-        <a id="go-language" class="anchor" href="#go-language" aria-hidden="true"><span aria-hidden="true"
-                                                                                        class="octicon octicon-link"></span></a>Go
-        Language</h3>
+          <a id="go-language" class="anchor" href="#go-language" aria-hidden="true"><span aria-hidden="true"
+                                                                                          class="octicon octicon-link"></span></a>
+          Go Language
+      </h3>
 
       <p>Currently porting <code>cyclictest</code> to Go</p>
 
       <h3>
         <a id="go-language-with-realtime-extensions" class="anchor" href="#go-language-with-realtime-extensions"
-           aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Go Language with Realtime
-        Extensions</h3>
+           aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+
+          Go Language with Realtime Extensions
+      </h3>
 
         <p>Currently porting <code>cyclictest</code> to Go<sup>RT</sup></p>
 
@@ -231,23 +261,43 @@
             Definitions
         </h2>
 
-        <ul>
-            <li><strong>Resolution:</strong> The smallest representable unit of a measurement</li>
-            <li><strong>Accuracy:</strong> The smallest repeatable unit of measurement</li>
-            <li><strong>Latency:</strong> The time elapsed from some time T when an event has actually occurred till
+        <dl>
+            <dt>Resolution:</dt>
+            <dd>The smallest representable unit of a measurement</dd>
+            <dt>Accuracy:</dt>
+            <dd>The smallest repeatable unit of measurement</dd>
+            <dt>Latency:</dt>
+            <dd>The time elapsed from some time T when an event has actually occurred till
                 when it is acknowledge as having occurred
-            </li>
-            <li><strong>Jitter:</strong> The deviation from true periodicity of a presumed periodic event</li>
-        </ul>
+            </dd>
+            <dt>Jitter:</dt>
+            <dd>The deviation from true periodicity of a presumed periodic event</dd>
+        </dl>
 
         <h2>
             <a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true"
                                                                                           class="octicon octicon-link"></span></a>
             References
         </h2>
-      <footer class="site-footer">
+
+        <ol>
+            <li>
+                <cite>Communicating sequential processes</cite>, C.A.R. Hoare, Communications of the ACM, vol. 21, no.
+                8, pp. 666-677, 1978.
+            </li>
+            <li>
+                <cite>A Comparison of Scheduling Latency in Linux, PREEMPT RT, and LITMUS<sup>RT</sup></cite>, Felipe
+                Cerqueira and Bjorn Brandenburg, Max Planck Institute for Software Systems (MPI-SWS)
+            </li>
+            <li>
+                <cite>Using and Understanding the Real-Time Cyclictest Benchmark</cite>, Frank Rowand, Sony Mobile
+                Communications, Oct 2013, http://events.linuxfoundation.org/sites/events/files/slides/cyclictest.pdf
+            </li>
+        </ol>
+
+        <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/RedShamilton/go">Go<sup>RT</sup></a> is maintained by <a
-                href="https://github.com/RedShamilton">Sean Hamilton</a>.</span>
+                href="http://acsweb.ucsd.edu/~skhamilt/">Sean Hamilton</a>, Zhou Fang, and Dr. Rajesh Gupta.</span>
       </footer>
 
     </section>

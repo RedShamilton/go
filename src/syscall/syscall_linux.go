@@ -931,10 +931,10 @@ func Munmap(b []byte) (err error) {
 //sys	SchedGetPriorityMin(policy int) (n int, err error)
 //SchedSetAffinity
 //SchedGetAffinity
-//sys	SchedSetParam(pid _Pid_t, param *SchedParam) (n int, err error)
-//sys	SchedGetParam(pid _Pid_t, param *SchedParam) (n int, err error)
-//sys	SchedSetScheduler(pid _Pid_t, policy int, param *SchedParam) (n int, err error)
-//sys	SchedGetScheduler(pid _Pid_t) (n int, err error)
+//sys	SchedSetparam(pid _Pid_t, param *SchedParam) (n int, err error)
+//sys	SchedGetparam(pid _Pid_t, param *SchedParam) (n int, err error)
+//sys	SchedSetscheduler(pid _Pid_t, policy int, param *SchedParam) (n int, err error)
+//sys	SchedGetscheduler(pid _Pid_t) (n int, err error)
 //SchedRrGetInterval
 //SchedYield
 

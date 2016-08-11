@@ -180,7 +180,6 @@ const (
         SCHED_IDLE      = C.SCHED_IDLE
         SCHED_FIFO      = C.SCHED_FIFO
         SCHED_RR        = C.SCHED_RR
-        SCHED_DEADLINE  = C.SCHED_DEADLINE
       )
 
 // Files

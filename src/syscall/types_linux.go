@@ -26,6 +26,7 @@ package syscall
 #include <netpacket/packet.h>
 #include <signal.h>
 #include <stdio.h>
+#include <sched.h>
 #include <sys/epoll.h>
 #include <sys/inotify.h>
 #include <sys/mman.h>
@@ -161,13 +162,25 @@ type Tms C.struct_tms
 
 type Utimbuf C.struct_utimbuf
 
-// Processes
+// Processes/Threads
 
 type Rusage C.struct_rusage
 
 type Rlimit C.struct_rlimit
 
 type _Gid_t C.gid_t
+
+type _Pid_t C.pid_t
+
+type SchedParam C.struct_sched_param
+
+const (
+        SCHED_OTHER     = C.SCHED_OTHER
+        SCHED_BATCH     = C.SCHED_BATCH
+        SCHED_IDLE      = C.SCHED_IDLE
+        SCHED_FIFO      = C.SCHED_FIFO
+        SCHED_RR        = C.SCHED_RR
+      )
 
 // Files
 

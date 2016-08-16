@@ -231,10 +231,10 @@
       </pre>
 
       <figure>
-          <figcaption>Scheduling Latency Histogram for SCHED_FIFO</figcaption>
+          <figcaption>Figure 1: Scheduling Latency Histogram for SCHED_FIFO</figcaption>
           <img src="images/hist-fifo.svg" alt="Histogram for SCHED_FIFO">
 
-          <figcaption>Scheduling Latency Histogram for SCHED_NORM</figcaption>
+          <figcaption>Figure 2: Scheduling Latency Histogram for SCHED_NORM</figcaption>
           <img src="images/hist-norm.svg" alt="Histogram for SCHED_NORM">
       </figure>
 
@@ -244,7 +244,30 @@
           Go Language
       </h3>
 
-      <p>Currently porting <code>cyclictest</code> to Go</p>
+        <p>
+            A rewrite of <code>cyclictest</code> called <a href="https://github.com/RedShamilton/cyclictest-go"><code>cyclictest-go</code></a>
+            is used here to obtain the results. This version uses a newly added method to the <code>time</code> package
+            called <code>time.WaitUntil(t Time)</code>. This new method waits until a specific period in time compared
+            to <code>time.Sleep(d Duration)</code> which only sleeps for a relative amount of time from invocation. This
+            version is still a work in progress and has some known issues as noted in the <code>README</code> file.
+        </p>
+
+        <p>
+            It can be seen from the output below that the best and average cases are better than those observed in the
+            C version of <code>cyclictest</code>; however, the worst case tends to be slightly worse.
+        </p>
+
+        <pre>
+            <code>
+                root@beaglebone:~# cyclictest-go -t 1 -l 10000 -p 99
+                T:  0 P:99 I: 1ms C:   10000 Min:     1.319µs Act:     2.027µs Avg:    12.709µs Max: 81.485µs
+            </code>
+        </pre>
+
+        <figure>
+            <figcaption>Figure 3: Scheduling Latency Histogram for Go</figcaption>
+            <img src="images/hist-go.svg" alt="Histogram for Go">
+        </figure>
 
       <h3>
         <a id="go-language-with-realtime-extensions" class="anchor" href="#go-language-with-realtime-extensions"
@@ -253,7 +276,7 @@
           Go Language with Realtime Extensions
       </h3>
 
-        <p>Currently porting <code>cyclictest</code> to Go<sup>RT</sup></p>
+        <p>Waiting to complete Go<sup>RT</sup></p>
 
         <h2>
             <a id="definitions" class="anchor" href="#definitions" aria-hidden="true"><span aria-hidden="true"
